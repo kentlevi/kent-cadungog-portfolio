@@ -715,6 +715,31 @@ a {
   font-size: 1.05rem;
 }
 
+.timeline-body ul {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  list-style: none;
+}
+
+.timeline-body li {
+  position: relative;
+  margin-bottom: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.94rem;
+}
+
+.timeline-body li::before {
+  content: "";
+  position: absolute;
+  left: -1.25rem;
+  top: 0.65rem;
+  width: 0.4rem;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
 .project-stack {
   display: grid;
   gap: 1.3rem;
