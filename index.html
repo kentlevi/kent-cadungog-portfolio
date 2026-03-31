@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Kent Levi Cadungog is a frontend developer and interface designer crafting performance-driven, SEO-optimized, visually polished web experiences."
+  />
+  <title>Kent Levi Cadungog | Frontend Developer</title>
+
+  <!-- SEO / Social Sharing -->
+  <meta property="og:title" content="Kent Levi Cadungog | Frontend Developer" />
+  <meta property="og:description" content="Frontend developer and interface designer crafting performance-driven, visually polished web experiences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kentlevicadungog.com" />
+  <meta property="og:image" content="assets/thumbs/musticker.jpg" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kent Levi Cadungog | Frontend Developer" />
+  <meta name="twitter:description" content="Frontend-focused software developer building high-performance web applications and UI systems." />
+  <meta name="twitter:image" content="assets/thumbs/musticker.jpg" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="cursor-shell" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+  <div class="page-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="noise"></div>
+    <div class="gradient-shift"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Kent Levi Cadungog home">
+        <span class="brand-mark">KL</span>
+        <span class="brand-copy">
+          <strong>Kent Levi</strong>
+          <span>Frontend Developer</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#about" class="nav-link interactive-link">About</a>
+        <a href="#projects" class="nav-link interactive-link">Projects</a>
+        <a href="#skills" class="nav-link interactive-link">Skills</a>
+        <a href="#contact" class="nav-link interactive-link">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="hero">
+        <div class="hero-backdrop"></div>
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow split-line" data-split="words">Frontend Developer / Interface Designer</p>
+            <h1 class="hero-title">
+              <span class="split-line" data-split="chars">Kent Levi</span>
+              <span class="split-line accent-line" data-split="chars">Cadungog</span>
+            </h1>
+            <p class="hero-lead split-line" data-split="words">
+              I design and build high-performance interfaces that balance motion, readability, SEO, and product clarity.
+            </p>
+            <p class="hero-text reveal-copy">
+              Frontend-focused software developer in Cebu City with 4+ years of experience shipping responsive web
+              applications, conversion-focused landing pages, multilingual storefronts, and maintainable UI systems.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary magnetic interactive-link" href="#projects">View Projects</a>
+              <a class="button button-secondary magnetic interactive-link" href="#contact">Let's Work</a>
+            </div>
+
+            <div class="hero-presence reveal-copy">
+              <span class="presence-dot"></span>
+              Available for frontend roles and product-focused freelance work
+            </div>
+
+            <ul class="hero-metrics">
+              <li>
+                <strong>4+</strong>
+                <span>Years shaping web products</span>
+              </li>
+              <li>
+                <strong>Vue / Nuxt / React</strong>
+                <span>Modern frontend delivery</span>
+              </li>
+              <li>
+                <strong>SEO + Core Web Vitals</strong>
+                <span>Search-friendly performance work</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" data-parallax-root>
+            <article class="floating-card glass card-primary" data-depth="24" data-tilt>
+              <span class="card-kicker">Current Role</span>
+              <h2>Frontend Developer</h2>
+              <p>Glophics Web Design &amp; Advertising</p>
+              <ul>
+                <li>Cebu City, Philippines</li>
+                <li>SEO, accessibility, responsive systems</li>
+              </ul>
+            </article>
+
+            <article class="floating-card glass card-secondary" data-depth="40" data-tilt>
+              <span class="card-kicker">Core Focus</span>
+              <p>Performance-driven UI engineering, REST API integration, and product interfaces built for scale.</p>
+            </article>
+
+            <article class="floating-card skill-orbit" data-depth="52" aria-label="Core technologies" data-tilt>
+              <span>Vue.js</span>
+              <span>Nuxt.js</span>
+              <span>React</span>
+              <span>JavaScript</span>
+              <span>SEO</span>
+              <span>Motion</span>
+            </article>
+
+            <article class="floating-card project-peek glass" data-depth="68" data-tilt>
+              <span class="card-kicker">Featured Build</span>
+              <h3>Musticker US</h3>
+              <p>Multilingual sticker storefront built from scratch with a cleaner architecture and upgraded frontend stack.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div class="container section-grid">
+          <div class="section-intro">
+            <p class="eyebrow">About Me</p>
+            <h2 data-split="words">Clean engineering with a sharp visual eye.</h2>
+          </div>
+
+          <div class="about-layout">
+            <div class="about-copy glass section-panel">
+              <p>
+                I am a frontend-focused software developer with strong experience in Vue.js, Nuxt.js, and React,
+                building high-performance interfaces that stay fast, accessible, and practical in production.
+              </p>
+              <p>
+                My work spans marketing sites, e-commerce experiences, scheduling platforms, internal tools, and
+                content-driven products where strong UX and maintainable frontend architecture matter just as much as
+                polish.
+              </p>
+            </div>
+
+            <div class="editorial-quote">
+              <span class="quote-mark">"</span>
+              <p>
+                I care about motion and interface quality, but never at the expense of clarity, usability, or speed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section experience-section">
+        <div class="container">
+          <div class="section-intro">
+            <p class="eyebrow">Experience</p>
+            <h2 data-split="words">Professional timeline shaped by product delivery.</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item glass reveal-section">
+              <div class="timeline-meta">
+                <span>Apr 2025 - Present</span>
+                <p>Glophics Web Design &amp; Advertising Inc.</p>
+              </div>
+              <div class="timeline-body">
+                <h3>Frontend Developer</h3>
+                <p>
+                  Leading frontend work across multilingual storefronts, performance optimization, reusable component
+                  systems, and Core Web Vitals improvements.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item glass reveal-section">
+              <div class="timeline-meta">
+                <span>Jan 2023 - Apr 2025</span>
+                <p>Dinnox IT Solutions</p>
+              </div>
+              <div class="timeline-body">
+                <h3>Frontend Developer</h3>
+                <p>
+                  Built responsive interfaces, integrated REST APIs, and improved maintainability using modern
+                  frontend development practices.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item glass reveal-section">
+              <div class="timeline-meta">
+                <span>Nov 2021 - Jan 2023</span>
+                <p>The Little Ripple Company Pty Ltd</p>
+              </div>
+              <div class="timeline-body">
+                <h3>Software Developer</h3>
+                <p>
+                  Supported e-commerce and scheduling platforms with scalable frontend delivery, debugging, and
+                  product-focused implementation.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects">
+        <div class="container">
+          <div class="section-intro">
+            <p class="eyebrow">Projects</p>
+            <h2 data-split="words">Selected product work, storefront builds, and browser tools.</h2>
+            <p class="section-note">
+              A curated mix of product delivery, landing page design work, storefront support, and frontend experiments.
+            </p>
+          </div>
+
+          <div class="project-stack">
+            <article class="project-card project-card-featured glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="featured-flag">Flagship Project</span>
+                <span class="project-type">Ongoing Product Build</span>
+                <h3>Musticker US</h3>
+                <p>
+                  A new sticker commerce platform where I am building the frontend from scratch, modernizing the
+                  storefront structure and rolling out multilingual support for English and Korean.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>From-scratch build</strong>
+                    <span>Modern storefront system with cleaner frontend architecture</span>
+                  </div>
+                  <div>
+                    <strong>EN / KR rollout</strong>
+                    <span>Multilingual experience designed for a broader market launch</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Vue.js</li>
+                  <li>Nuxt.js</li>
+                  <li>Multilingual UI</li>
+                  <li>Frontend Architecture</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://musticker.com/us" target="_blank" rel="noreferrer">Visit Project</a>
+              </div>
+              <div class="project-card-visual image-reveal">
+                <span class="image-mask"></span>
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/musticker.jpg"
+                  alt="Musticker US landing page thumbnail"
+                />
+                <div class="project-overlay">
+                  <span>Modern storefront foundation</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Multi-market Maintenance</span>
+                <h3>Sticker Printing Storefront Network</h3>
+                <p>
+                  Frontend support across seven related sticker printing storefronts, handling responsive fixes,
+                  localized merchandising updates, banner rollouts, and SEO-aware maintenance.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>7 live storefronts</strong>
+                    <span>Shared frontend quality across multiple regional sites</span>
+                  </div>
+                  <div>
+                    <strong>Ongoing campaigns</strong>
+                    <span>Fast rollout of banners, content updates, and responsive fixes</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Vue.js</li>
+                  <li>Nuxt.js</li>
+                  <li>SEO Metadata</li>
+                  <li>Maintenance</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://www.allstickerprinting.com/" target="_blank" rel="noreferrer">Explore Storefronts</a>
+              </div>
+              <div class="project-card-visual project-summary-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/all-sticker-printing.jpg"
+                  alt="Sticker Printing Storefront Network thumbnail"
+                />
+                <div class="project-overlay">
+                  <span>7 live storefronts</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Landing Page</span>
+                <h3>Postcards from Mars</h3>
+                <p>
+                  A cinematic Mars exploration landing page built around deep parallax layering, GSAP-driven scroll
+                  motion, and a more experimental editorial interaction style.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>Experimental motion work</strong>
+                    <span>Built to explore scroll choreography, spatial depth, and cinematic transitions</span>
+                  </div>
+                  <div>
+                    <strong>Immersive storytelling</strong>
+                    <span>Combines parallax, canvas atmosphere, and interactive browsing moments</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>GSAP</li>
+                  <li>Three.js</li>
+                  <li>Vanilla Frontend</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://postcards-from-mars-rho.vercel.app/" target="_blank" rel="noreferrer">View Landing Page</a>
+              </div>
+              <div class="project-card-visual project-summary-card project-thumb-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/postcards-from-mars.jpg"
+                  alt="Postcards from Mars landing page thumbnail"
+                />
+                <div class="summary-panel">
+                  <span>Cinematic Interaction</span>
+                  <strong>Orbital scroll storytelling</strong>
+                  <p>Experimental landing page exploring Mars through layered motion, atmosphere, and editorial pacing.</p>
+                </div>
+                <div class="project-overlay">
+                  <span>Cinematic Interaction</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Landing Page</span>
+                <h3>Vesper Coffee</h3>
+                <p>
+                  A premium coffee brand landing page with a high-contrast editorial look, artisan storytelling, and
+                  product-forward sections built around the ritual of specialty brewing.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>Artisan cafe identity</strong>
+                    <span>Strong visual direction for brand, menu, and product storytelling</span>
+                  </div>
+                  <div>
+                    <strong>Editorial section flow</strong>
+                    <span>Built for smooth product browsing and premium hospitality presentation</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Nuxt</li>
+                  <li>Brand Experience</li>
+                  <li>GSAP</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://vesper-coffee-6jf2j3r09-kentlevis-projects.vercel.app/" target="_blank" rel="noreferrer">View Landing Page</a>
+              </div>
+              <div class="project-card-visual project-summary-card project-thumb-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/vesper-coffee.jpg"
+                  alt="Vesper Coffee landing page thumbnail"
+                />
+                <div class="summary-panel">
+                  <span>Premium Artisan Brews</span>
+                  <strong>High-contrast coffee editorial</strong>
+                  <p>Landing page concept focused on atmosphere, craft, and premium product storytelling.</p>
+                </div>
+                <div class="project-overlay">
+                  <span>Premium Artisan Brews</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Landing Page</span>
+                <h3>Cozina de Marray</h3>
+                <p>
+                  A premium grill and bar concept mixing Cebuano culinary heritage with a modern editorial dining
+                  experience, rich campaign storytelling, and immersive menu presentation.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>Restaurant brand concept</strong>
+                    <span>Built around hospitality storytelling, menu theatre, and refined visual rhythm</span>
+                  </div>
+                  <div>
+                    <strong>Campaign-style sections</strong>
+                    <span>Structured for cinematic food presentation and luxury dining identity</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Nuxt</li>
+                  <li>Hospitality Design</li>
+                  <li>Editorial UI</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://cozina-de-marray.vercel.app/" target="_blank" rel="noreferrer">View Landing Page</a>
+              </div>
+              <div class="project-card-visual project-summary-card project-thumb-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/cozina-de-marray.jpg"
+                  alt="Cozina de Marray landing page thumbnail"
+                />
+                <div class="summary-panel">
+                  <span>Premium Grill &amp; Bar</span>
+                  <strong>Modern flame and heritage storytelling</strong>
+                  <p>Restaurant landing page concept designed around culinary theatre, warmth, and premium dining cues.</p>
+                </div>
+                <div class="project-overlay">
+                  <span>Premium Grill &amp; Bar</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Landing Page</span>
+                <h3>Solenne Bay Luxury Resort</h3>
+                <p>
+                  A cinematic luxury resort landing page focused on refined villas, coastal escape storytelling, and a
+                  premium hospitality visual language.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>Resort brand positioning</strong>
+                    <span>Built for luxury travel presentation with polished editorial structure</span>
+                  </div>
+                  <div>
+                    <strong>High-end experience design</strong>
+                    <span>Supports immersive room showcases, atmosphere, and elegant section flow</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Nuxt</li>
+                  <li>Luxury Resort</li>
+                  <li>GSAP</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://solenne-bay-resort.vercel.app/" target="_blank" rel="noreferrer">View Landing Page</a>
+              </div>
+              <div class="project-card-visual project-summary-card project-thumb-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/solenne-bay.jpg"
+                  alt="Solenne Bay landing page thumbnail"
+                />
+                <div class="summary-panel">
+                  <span>Unlock Your Best Stays</span>
+                  <strong>Refined coastal escape concept</strong>
+                  <p>Luxury resort landing page concept built around villas, serenity, and premium travel presentation.</p>
+                </div>
+                <div class="project-overlay">
+                  <span>Unlock Your Best Stays</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass sticky-card reveal-section" data-tilt>
+              <div class="project-card-copy">
+                <span class="project-type">Landing Page</span>
+                <h3>Cebu Sanctuary</h3>
+                <p>
+                  A cinematic sanctuary concept built around cliffside stillness, restorative luxury, and immersive
+                  editorial storytelling with high-contrast resort visuals.
+                </p>
+                <div class="project-outcomes">
+                  <div>
+                    <strong>Luxury retreat concept</strong>
+                    <span>Hero-led storytelling with premium travel and wellness positioning</span>
+                  </div>
+                  <div>
+                    <strong>Editorial motion direction</strong>
+                    <span>Designed for atmosphere, rhythm, and immersive landing-page browsing</span>
+                  </div>
+                </div>
+                <ul class="project-tags">
+                  <li>Editorial Layout</li>
+                  <li>Luxury Branding</li>
+                  <li>Landing Page Design</li>
+                </ul>
+                <a class="inline-link magnetic interactive-link" href="https://cebu-sanctuary.vercel.app/" target="_blank" rel="noreferrer">View Landing Page</a>
+              </div>
+              <div class="project-card-visual project-summary-card project-thumb-card">
+                <img
+                  loading="lazy"
+                  src="assets/thumbs/cebu-sanctuary.jpg"
+                  alt="Cebu Sanctuary landing page thumbnail"
+                />
+                <div class="summary-panel">
+                  <span>Elevated Stillness</span>
+                  <strong>Cliffside retreat storytelling</strong>
+                  <p>Luxury landing page concept built around atmosphere, travel aspiration, and immersive visual pacing.</p>
+                </div>
+                <div class="project-overlay">
+                  <span>Elevated Stillness</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section skills-section" id="skills">
+        <div class="container">
+          <div class="section-intro">
+            <p class="eyebrow">Skills</p>
+            <h2 data-split="words">Frontend strengths backed by practical product experience.</h2>
+          </div>
+
+          <div class="skills-layout">
+            <div class="skills-side">
+              <div class="skills-copy glass section-panel reveal-section">
+                <p>
+                  My strongest work sits at the intersection of UI implementation, frontend architecture, performance
+                  optimization, and SEO-aware development. I enjoy building polished interfaces that still hold up in
+                  real product environments.
+                </p>
+              </div>
+
+              <div class="skill-cloud glass reveal-section" aria-label="Technology list">
+                <span>Vue.js</span>
+                <span>Nuxt.js</span>
+                <span>React</span>
+                <span>JavaScript</span>
+                <span>SCSS</span>
+                <span>Tailwind</span>
+                <span>Bootstrap</span>
+                <span>REST APIs</span>
+                <span>WordPress</span>
+                <span>Python</span>
+                <span>Django</span>
+                <span>Figma</span>
+              </div>
+            </div>
+
+            <div class="skills-bars">
+              <article class="skill-meter reveal-section">
+                <div class="skill-meta">
+                  <span>Vue.js / Nuxt.js</span>
+                  <strong>94%</strong>
+                </div>
+                <div class="meter-track"><span class="meter-fill" data-level="94"></span></div>
+              </article>
+
+              <article class="skill-meter reveal-section">
+                <div class="skill-meta">
+                  <span>React / JavaScript</span>
+                  <strong>91%</strong>
+                </div>
+                <div class="meter-track"><span class="meter-fill" data-level="91"></span></div>
+              </article>
+
+              <article class="skill-meter reveal-section">
+                <div class="skill-meta">
+                  <span>Responsive UI / Accessibility</span>
+                  <strong>95%</strong>
+                </div>
+                <div class="meter-track"><span class="meter-fill" data-level="95"></span></div>
+              </article>
+
+              <article class="skill-meter reveal-section">
+                <div class="skill-meta">
+                  <span>SEO / Core Web Vitals</span>
+                  <strong>89%</strong>
+                </div>
+                <div class="meter-track"><span class="meter-fill" data-level="89"></span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="container contact-layout glass">
+          <div class="contact-copy">
+            <p class="eyebrow">Contact</p>
+            <h2 data-split="words">Open to frontend roles, product UI work, and performance-focused builds.</h2>
+            <p>
+              I build responsive interfaces and polished web experiences for teams that care about delivery quality,
+              usability, and maintainable frontend systems.
+            </p>
+            <div class="contact-cta-panel">
+              <span class="contact-availability">Currently available</span>
+              <p>
+                Best fit for teams that need a frontend developer who can balance interface polish, implementation
+                quality, and practical product thinking.
+              </p>
+              <a class="button button-primary magnetic interactive-link" href="mailto:kentlevicadungog@gmail.com">Start a Conversation</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-row">
+              <span>Name</span>
+              <strong>Kent Levi L. Cadungog</strong>
+            </div>
+            <div class="contact-row">
+              <span>Location</span>
+              <strong>Cebu City, Philippines</strong>
+            </div>
+            <div class="contact-row">
+              <span>Email</span>
+              <a class="interactive-link" href="mailto:kentlevicadungog@gmail.com">kentlevicadungog@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span>Phone</span>
+              <a class="interactive-link" href="tel:+639562910509">+63 956 291 0509</a>
+            </div>
+            <div class="contact-row">
+              <span>Education</span>
+              <strong>BS in Information Technology</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
