@@ -122,8 +122,8 @@
         </div>
       </section>
 
-      <section class="section about-section" id="about">
-        <div class="container about-grid">
+      <section class="section about-section reveal-blur" id="about">
+        <div class="container about-grid scroll-zoom-element">
           <div class="about-visual reveal-section">
             <div class="profile-frame">
               <img src="assets/profile.jpg" alt="Kent Levi Cadungog" loading="lazy" class="profile-img">
@@ -153,8 +153,8 @@
         </div>
       </section>
 
-      <section class="section experience-section" id="experience">
-        <div class="container timeline-container">
+      <section class="section experience-section reveal-blur" id="experience">
+        <div class="container timeline-container scroll-zoom-element">
           <div class="experience-intro reveal-section">
             <p class="eyebrow">Experience</p>
             <h2 class="section-title">A career shaped by product delivery.</h2>
@@ -200,8 +200,8 @@
         </div>
       </section>
 
-      <section class="section project-section" id="projects">
-        <div class="container">
+      <section class="section project-section reveal-blur" id="projects">
+        <div class="container scroll-zoom-element">
           <div class="project-intro reveal-section">
             <p class="eyebrow">Selected Work</p>
             <h2 class="section-title">Shipping refined products for global audiences.</h2>
@@ -343,8 +343,8 @@
         </div>
       </section>
 
-      <section class="section skills-section" id="skills">
-        <div class="container">
+      <section class="section skills-section reveal-blur" id="skills">
+        <div class="container scroll-zoom-element">
           <div class="skills-intro reveal-section">
             <p class="eyebrow">Skills</p>
             <h2 class="section-title">Technical expertise focused on performance.</h2>
@@ -403,8 +403,8 @@
         </div>
       </section>
 
-      <section class="section contact-section" id="contact">
-        <div class="container contact-layout glass">
+      <section class="section contact-section reveal-blur" id="contact">
+        <div class="container contact-layout glass scroll-zoom-element">
           <div class="contact-copy">
             <p class="eyebrow">Contact</p>
             <h2 data-split="words">Open to frontend roles, product UI work, and performance-focused builds.</h2>
@@ -476,6 +476,14 @@
     <div class="ambient ambient-two"></div>
     <div class="noise"></div>
     <div class="gradient-shift"></div>
+
+    <!-- Premium Noise Filter -->
+    <svg id="texture-filter" style="display: none;">
+      <filter id="grainy-noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+    </svg>
   </div>
 </body>
 </html>

@@ -99,6 +99,38 @@ const setupMagneticHover = () => {
   });
 };
 
+const setupTilt = () => {
+  const tiltCards = document.querySelectorAll(".project-card");
+
+  tiltCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      if (prefersReducedMotion) return;
+      const { left, top, width, height } = card.getBoundingClientRect();
+      // Calculate cursor position from center of card (-0.5 to 0.5)
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+
+      gsap.to(card, {
+        rotateY: x * 12,
+        rotateX: y * -12,
+        transformPerspective: 1200,
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, { 
+        rotateX: 0, 
+        rotateY: 0, 
+        duration: 0.8, 
+        ease: "power3.out" 
+      });
+    });
+  });
+};
+
 const setupHeroInteractions = () => {
   const root = document.querySelector("[data-parallax-root]");
   const cards = document.querySelectorAll(".floating-card");
@@ -472,15 +504,63 @@ const setupScrollAnimations = () => {
   });
 };
 
+const setupAdvancedMotion = () => {
+  if (prefersReducedMotion) return;
+
+  // Reveal Blur Logic
+  gsap.utils.toArray(".reveal-blur").forEach((section) => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 75%",
+      onEnter: () => section.classList.add("is-in-view"),
+      once: true,
+    });
+  });
+
+  // Section Zoom-on-Scroll Logic
+  gsap.utils.toArray(".scroll-zoom-element").forEach((container) => {
+    gsap.fromTo(container, 
+      { scale: 0.96, opacity: 0.9 },
+      {
+        scale: 1,
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: container,
+          start: "top 95%",
+          end: "top 35%",
+          scrub: 1.2,
+        }
+      }
+    );
+  });
+
+  // Background Gradient Drift Enhancement (Sync with scroll)
+  gsap.to(".gradient-shift", {
+    rotation: 5,
+    x: "3%",
+    y: "-3%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: document.body,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 2,
+    }
+  });
+};
+
 window.addEventListener("DOMContentLoaded", () => {
   splitText();
   setupThumbnailFallbacks();
   setupCursor();
   setupHeroInteractions();
   setupMagneticHover();
+  setupTilt();
   setupActiveNavigation();
   setupSkillMeters();
   setupScrollAnimations();
+  setupAdvancedMotion();
   setupMobileNav();
 
   // Final layout refresh for ScrollTrigger after all elements are positioned
