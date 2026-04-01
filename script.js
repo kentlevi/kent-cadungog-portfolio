@@ -99,69 +99,58 @@ const setupMagneticHover = () => {
   });
 };
 
-const setupTiltCards = () => {
-  const items = document.querySelectorAll("[data-tilt]");
-
-  items.forEach((item) => {
-    const reset = () => {
-      gsap.to(item, {
-        rotateX: 0,
-        rotateY: 0,
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: "expo.out",
-      });
-    };
-
-    item.addEventListener("mousemove", (event) => {
-      if (prefersReducedMotion || window.innerWidth <= 760 || !heroIntroReady) return;
-
-      const rect = item.getBoundingClientRect();
-      const px = (event.clientX - rect.left) / rect.width - 0.5;
-      const py = (event.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(item, {
-        rotateY: px * 8,
-        rotateX: py * -8,
-        x: px * 6,
-        y: py * 6,
-        duration: 0.35,
-        ease: "power3.out",
-        transformPerspective: 1200,
-        overwrite: true,
-      });
-    });
-
-    item.addEventListener("mouseleave", reset);
-  });
-};
-
-const setupHeroParallax = () => {
+const setupHeroInteractions = () => {
   const root = document.querySelector("[data-parallax-root]");
-  const cards = document.querySelectorAll("[data-depth]");
+  const cards = document.querySelectorAll(".floating-card");
 
-  if (!root || prefersReducedMotion) return;
+  if (!root || !cards.length || prefersReducedMotion) return;
 
-  root.addEventListener("mousemove", (event) => {
+  const state = {
+    mouseX: 0,
+    mouseY: 0,
+    rect: root.getBoundingClientRect(),
+  };
+
+  const update = () => {
     if (!heroIntroReady) return;
 
-    const rect = root.getBoundingClientRect();
-    const relativeX = (event.clientX - rect.left) / rect.width - 0.5;
-    const relativeY = (event.clientY - rect.top) / rect.height - 0.5;
-
     cards.forEach((card) => {
-      const depth = Number(card.dataset.depth || 24);
+      const depth = Number(card.dataset.depth || 20);
+      const isTiltActive = card.matches(":hover") && card.hasAttribute("data-tilt");
+      
+      // Base parallax calculation
+      let x = state.mouseX * depth;
+      let y = state.mouseY * depth;
+      let rotateY = state.mouseX * 8;
+      let rotateX = state.mouseY * -8;
+
+      // Add tilt influence if being hovered directly
+      if (isTiltActive) {
+        // We could add more complex tilt logic here, but simpler is more stable
+        x *= 1.25;
+        y *= 1.25;
+        rotateY *= 2;
+        rotateX *= 2;
+      }
+
       gsap.to(card, {
-        x: relativeX * depth,
-        y: relativeY * depth,
-        rotateY: relativeX * 6,
-        rotateX: relativeY * -6,
-        duration: 0.9,
-        ease: "power3.out",
-        overwrite: true,
+        x,
+        y,
+        rotateX,
+        rotateY,
+        duration: isTiltActive ? 0.35 : 0.8,
+        ease: isTiltActive ? "power3.out" : "power2.out",
+        overwrite: "auto",
+        transformPerspective: 1200,
       });
     });
+  };
+
+  root.addEventListener("mousemove", (event) => {
+    state.rect = root.getBoundingClientRect();
+    state.mouseX = (event.clientX - state.rect.left) / state.rect.width - 0.5;
+    state.mouseY = (event.clientY - state.rect.top) / state.rect.height - 0.5;
+    update();
   });
 
   root.addEventListener("mouseleave", () => {
@@ -169,20 +158,22 @@ const setupHeroParallax = () => {
       gsap.to(card, {
         x: 0,
         y: 0,
-        rotateY: 0,
         rotateX: 0,
-        duration: 1.1,
+        rotateY: 0,
+        duration: 1.2,
         ease: "expo.out",
+        overwrite: "auto",
       });
     });
   });
-};
 
-const setupHeroCardFocus = () => {
-  const root = document.querySelector(".hero-visual");
-  const cards = root?.querySelectorAll(".floating-card");
-
-  if (!root || !cards?.length) return;
+  // Hero Card Focus logic integrated for better synergy
+  const activateCard = (card) => {
+    cards.forEach((item) => {
+      item.classList.toggle("is-focused", item === card);
+      item.classList.toggle("is-dimmed", item !== card);
+    });
+  };
 
   const clearFocus = () => {
     cards.forEach((card) => {
@@ -190,33 +181,23 @@ const setupHeroCardFocus = () => {
     });
   };
 
-  const activateCard = (card) => {
-    if (!card) return;
-
-    cards.forEach((item) => {
-      item.classList.toggle("is-focused", item === card);
-      item.classList.toggle("is-dimmed", item !== card);
-    });
-  };
-
   cards.forEach((card) => {
     card.addEventListener("mouseenter", () => activateCard(card));
     card.addEventListener("focusin", () => activateCard(card));
-    card.addEventListener("focusout", () => {
-      window.setTimeout(() => {
-        if (!card.contains(document.activeElement)) {
-          clearFocus();
-        }
-      }, 0);
+    card.addEventListener("focusout", (e) => {
+      if (!card.contains(e.relatedTarget)) {
+        clearFocus();
+      }
     });
   });
-
-  root.addEventListener("mouseleave", clearFocus);
 };
 
 const setupSkillMeters = () => {
-  document.querySelectorAll(".meter-fill").forEach((fill) => {
-    const targetWidth = `${fill.dataset.level || 0}%`;
+  document.querySelectorAll(".progress-fill").forEach((fill) => {
+    const targetWidth = fill.style.width || "0%";
+    
+    // Clear initial width for GSAP to animate from 0
+    gsap.set(fill, { width: 0 });
 
     if (prefersReducedMotion) {
       fill.style.width = targetWidth;
@@ -225,11 +206,12 @@ const setupSkillMeters = () => {
 
     gsap.to(fill, {
       width: targetWidth,
-      duration: 1.4,
-      ease: "expo.out",
+      duration: 1.6,
+      delay: 0.2,
+      ease: "power4.out",
       scrollTrigger: {
         trigger: fill,
-        start: "top 88%",
+        start: "top 92%",
         once: true,
       },
     });
@@ -288,94 +270,84 @@ const setupActiveNavigation = () => {
 
 const setupScrollAnimations = () => {
   if (prefersReducedMotion) {
-    document.querySelectorAll(".reveal-section").forEach((section) => {
-      section.style.opacity = "1";
-      section.style.transform = "none";
-      section.style.filter = "none";
-    });
-    document.querySelectorAll(".image-mask").forEach((mask) => {
-      mask.style.transform = "scaleX(0)";
+    document.querySelectorAll(".reveal-text, .reveal-item").forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
     });
     return;
   }
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const heroTimeline = gsap.timeline({ defaults: { ease: "expo.out" } });
-
-  // The hero sequence layers words, metrics, and floating panels so the first impression feels controlled and premium.
-  heroTimeline
-    .from(".site-header", {
-      y: -30,
-      opacity: 0,
-      duration: 0.8,
-    })
-    .from(
-      ".floating-card",
-      {
-        y: 46,
-        scale: 0.92,
-        opacity: 0,
-        filter: "blur(16px)",
-        duration: 1.05,
-        stagger: 0.1,
-        ease: "power3.out",
-      },
-      0
-    )
-    .from(
-      ".eyebrow .split-word, .hero-lead .split-word",
-      {
-        yPercent: 110,
-        opacity: 0,
-        filter: "blur(10px)",
-        duration: 0.9,
-        stagger: 0.03,
-      },
-      "-=0.2"
-    )
-    .from(
-      ".hero-title .split-char",
-      {
-        yPercent: 120,
-        opacity: 0,
-        filter: "blur(14px)",
-        duration: 0.95,
-        stagger: 0.025,
-      },
-      "-=0.55"
-    )
-    .from(
-      ".reveal-copy",
-      {
-        y: 28,
-        opacity: 0,
-        filter: "blur(12px)",
-        duration: 0.9,
-      },
-      "-=0.55"
-    )
-    .from(
-      ".hero-actions .button, .hero-metrics li",
-      {
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-      },
-      "-=0.45"
-    );
-
-  heroTimeline.eventCallback("onComplete", () => {
-    heroIntroReady = true;
-    gsap.set(".hero-actions .button, .hero-presence, .hero-metrics li, .site-header, .reveal-copy", {
-      clearProps: "opacity,visibility,filter,transform,x,y,scale,rotate",
-    });
-    gsap.set(".floating-card", {
-      clearProps: "opacity,visibility,filter,transform,x,y,scale,rotate",
-    });
+  const heroTl = gsap.timeline({
+    defaults: { ease: "expo.out", duration: 1.2 },
+    onComplete: () => {
+      heroIntroReady = true;
+      ScrollTrigger.refresh();
+    }
   });
 
-  // Section reveals blend blur, lift, and slight scale so the page transitions feel smoother than a basic fade-up.
+  // Safety fallback to ensure UI is interactive even if timeline stalls
+  window.setTimeout(() => {
+    if (!heroIntroReady) {
+      heroIntroReady = true;
+      gsap.to(".reveal-text, .reveal-item, .floating-card", { opacity: 1, y: 0, duration: 1 });
+      ScrollTrigger.refresh();
+    }
+  }, 3500);
+
+  heroTl
+    .fromTo(".reveal-text", 
+      { y: 60, opacity: 0, skewY: 4 },
+      { y: 0, opacity: 1, skewY: 0, stagger: 0.15, duration: 1.5 }
+    )
+    .fromTo(".hero-lead",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2 },
+      "-=1.1"
+    )
+    .fromTo(".hero-visual .reveal-item:not(.floating-card), .hero-presence, .hero-actions",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, stagger: 0.1, duration: 1 },
+      "-=1"
+    )
+    .fromTo(".floating-card",
+      { y: 60, scale: 0.9, opacity: 0 },
+      { 
+        y: 0, 
+        scale: 1, 
+        opacity: 1, 
+        stagger: 0.15, 
+        duration: 1.5, 
+        ease: "power4.out",
+        clearProps: "scale,y,opacity"
+      },
+      "-=1.2"
+    )
+    .fromTo(".hero-metrics li",
+      { y: 28, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, stagger: 0.12, duration: 0.9, ease: "power3.out" },
+      "-=1.0"
+    );
+
+  // Animate the "4+" counter
+  const counterEl = document.querySelector(".hero-metrics strong");
+  if (counterEl && counterEl.textContent.includes("+")) {
+    const target = parseInt(counterEl.textContent);
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.6,
+      delay: 1.8,
+      ease: "power2.out",
+      snap: { val: 1 },
+      onUpdate: () => {
+        counterEl.textContent = Math.round(obj.val) + "+";
+      },
+    });
+  }
+
+  // Section reveals
   gsap.utils.toArray(".reveal-section").forEach((section) => {
     gsap.to(section, {
       y: 0,
@@ -413,14 +385,17 @@ const setupScrollAnimations = () => {
     });
   });
 
-  gsap.utils.toArray(".image-reveal").forEach((visual) => {
-    const image = visual.querySelector("img");
-    const mask = visual.querySelector(".image-mask");
+  gsap.utils.toArray(".project-featured").forEach((featured) => {
+    const visual = featured.querySelector(".image-reveal");
+    const image = visual?.querySelector("img");
+    const mask = visual?.querySelector(".image-mask");
+    const info = featured.querySelector(".project-info");
+    const infoElements = info?.querySelectorAll("h3, .project-category, .project-description, .project-stack li, .project-metrics, .project-actions");
 
     const reveal = gsap.timeline({
       scrollTrigger: {
-        trigger: visual,
-        start: "top 86%",
+        trigger: featured,
+        start: "top 82%",
         once: true,
       },
     });
@@ -428,59 +403,38 @@ const setupScrollAnimations = () => {
     if (mask) {
       reveal.to(mask, {
         scaleX: 0,
-        duration: 1.05,
-        ease: "power3.inOut",
+        duration: 1.25,
+        ease: "expo.inOut",
       });
     }
 
     if (image) {
       reveal.fromTo(
         image,
-        { scale: 1.14, filter: "blur(16px)" },
+        { scale: 1.15, filter: "blur(12px)" },
         {
           scale: 1,
           filter: "blur(0px)",
-          duration: 1.3,
-          ease: "expo.out",
+          duration: 1.4,
+          ease: "power3.out",
         },
-        0
+        0.1
       );
     }
-  });
 
-  gsap.utils.toArray(".section").forEach((section) => {
-    gsap.fromTo(
-      section,
-      { scale: 0.985 },
-      {
-        scale: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
+    if (infoElements) {
+      reveal.from(
+        infoElements,
+        {
+          y: 40,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.08,
+          ease: "power2.out",
         },
-      }
-    );
-  });
-
-  gsap.utils.toArray(".project-card-visual").forEach((visual) => {
-    gsap.fromTo(
-      visual,
-      { scale: 0.96, y: 18 },
-      {
-        scale: 1.02,
-        y: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: visual,
-          start: "top 92%",
-          end: "bottom 20%",
-          scrub: 1.3,
-        },
-      }
-    );
+        "-=0.75"
+      );
+    }
   });
 
   gsap.to(".gradient-shift", {
@@ -522,11 +476,34 @@ window.addEventListener("DOMContentLoaded", () => {
   splitText();
   setupThumbnailFallbacks();
   setupCursor();
-  setupHeroParallax();
-  setupHeroCardFocus();
+  setupHeroInteractions();
   setupMagneticHover();
-  setupTiltCards();
   setupActiveNavigation();
   setupSkillMeters();
   setupScrollAnimations();
+  setupMobileNav();
+
+  // Final layout refresh for ScrollTrigger after all elements are positioned
+  ScrollTrigger.refresh();
 });
+
+const setupMobileNav = () => {
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("site-nav");
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Close on nav link click
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+};
